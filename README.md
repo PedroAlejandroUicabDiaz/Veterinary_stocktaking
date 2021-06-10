@@ -1,1 +1,1 @@
-This is the documentation file
+This is the documentation file where project's rquirements will be specified later 
