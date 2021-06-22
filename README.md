@@ -1,4 +1,4 @@
-##This is the documentation file where project's rquirements will be specified later 
+## This is the documentation file where project's rquirements will be specified later 
 
 ### Team members:
 1. Emmanuel Alejandro Hurtado Alejandre
