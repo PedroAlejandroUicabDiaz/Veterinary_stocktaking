@@ -1,0 +1,4 @@
+# Files not necessary for building
+*.md
+backend
+frontend
