@@ -1,0 +1,38 @@
+<!-- Vista Login de la App Login -->
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Login</title>
+    </head>
+
+    <body>
+
+        <!-- No se que hace el extends jeje -->
+        {% extends 'index.html' %}
+
+        <!-- Abre un bloque de contenido -->
+        {% block content %}
+
+            <h1>System Login</h1>
+
+            <!-- Muestra retorno a Homepage -->
+            <a href="{% url 'home' %}"> Homepage </a>
+            <p> </p>
+
+            <!-- Abre un formulario de logueo -->
+            <form method='POST'>
+                {% csrf_token %}
+
+                <!-- Presentalo como una lista -->
+                {{form.as_ul}}
+
+                <!-- Boton de login -->
+                <button>Login</button>
+
+            </form>
+        {% endblock %}
+
+    </body>
+
+</html>

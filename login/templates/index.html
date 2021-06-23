@@ -1,0 +1,41 @@
+<!-- Vista Homepage de la App Login -->
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Homepage</title>
+    </head>
+
+    <body>
+
+        <!-- Abre un bloque de contenido -->
+        {% block content %}
+
+            <h1>Welcome to Homepage!</h1>
+
+            <!-- Si el usuario ya esta logueado -->
+            {% if user.is_authenticated %}
+
+                <!-- Muestra retorno para logout y dashboard -->
+                <a href="{% url 'logout' %}">Logout</a>
+                <p> </p>
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+
+                <!-- Si no esta logueado -->
+                {% else %}
+
+                <!-- Muestra retorno a login y register -->
+                <a href="{% url 'login_url' %}">Login</a>
+                <p> </p>
+                <a href="{% url 'register_url' %}">Register</a>
+
+            {% endif %}
+
+            <p>This is and example of homepage.</p>
+            <p>From here is where the user will pass before all.</p>
+
+        {% endblock %}
+
+    </body>
+
+</html>

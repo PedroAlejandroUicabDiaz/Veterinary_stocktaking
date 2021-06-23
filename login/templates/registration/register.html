@@ -1,0 +1,38 @@
+<!-- Vista Register de la App Login -->
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Register</title>
+    </head>
+
+    <body>
+
+        <!-- No se que hace el extends jeje -->
+        {% extends 'index.html' %}
+
+        <!-- Abre un bloque de contenido -->
+        {% block content %}
+
+            <h1>Create New Account</h1>
+
+            <!-- Muestra retorno a Homepage -->
+            <a href="{% url 'home' %}"> Homepage </a>
+            <p> </p>
+
+            <!-- Abre un formulario de registro de usuario -->
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- Presentalo como una lista -->
+                {{form.as_ul}}
+
+                <!-- Boton de register -->
+                <button>Register</button>
+                
+            </form>
+        {% endblock %}
+
+    </body>
+
+</html>

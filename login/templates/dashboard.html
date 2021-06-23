@@ -1,0 +1,33 @@
+<!-- Vista Dashboard de la App Login -->
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Dashboard</title>
+    </head>
+
+    <body>
+
+        <!-- No se que hace el extends jeje -->
+        {% extends 'index.html' %}
+
+        <!-- Abre un bloque de contenido -->
+        {% block content %}
+
+            <h1>Welcome to Dashboard, {{user.username}}</h1>
+
+            <!-- como el usuario debe de estar logueado -->
+            {% if user.is_authenticated %}
+
+                <!-- Muestra retorno para logout y dashboard -->
+                <a href="{% url 'logout' %}">Logout</a>
+                <p> </p>
+                <a href="{% url 'home' %}"> Homepage </a>
+
+            {% endif %}
+
+        {% endblock %}
+
+    </body>
+
+</html>
