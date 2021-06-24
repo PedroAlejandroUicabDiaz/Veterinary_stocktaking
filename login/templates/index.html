@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <title>Homepage</title>
+        <title>Inicio</title>
     </head>
 
     <body>
@@ -11,13 +11,13 @@
         <!-- Abre un bloque de contenido -->
         {% block content %}
 
-            <h1>Welcome to Homepage!</h1>
+            <h1>Bienvenido al Inicio!</h1>
 
             <!-- Si el usuario ya esta logueado -->
             {% if user.is_authenticated %}
 
                 <!-- Muestra retorno para logout y dashboard -->
-                <a href="{% url 'logout' %}">Logout</a>
+                <a href="{% url 'logout' %}">Log out</a>
                 <p> </p>
                 <a href="{% url 'dashboard' %}">Dashboard</a>
 
@@ -25,14 +25,11 @@
                 {% else %}
 
                 <!-- Muestra retorno a login y register -->
-                <a href="{% url 'login_url' %}">Login</a>
+                <a href="{% url 'login_url' %}">Log in</a>
                 <p> </p>
-                <a href="{% url 'register_url' %}">Register</a>
+                <a href="{% url 'register_url' %}">Registrate</a>
 
             {% endif %}
-
-            <p>This is and example of homepage.</p>
-            <p>From here is where the user will pass before all.</p>
 
         {% endblock %}
 
