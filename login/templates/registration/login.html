@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <title>Login</title>
+        <title>Log in</title>
     </head>
 
     <body>
@@ -14,10 +14,10 @@
         <!-- Abre un bloque de contenido -->
         {% block content %}
 
-            <h1>System Login</h1>
+            <h1>Log in</h1>
 
             <!-- Muestra retorno a Homepage -->
-            <a href="{% url 'home' %}"> Homepage </a>
+            <a href="{% url 'home' %}"> Inicio </a>
             <p> </p>
 
             <!-- Abre un formulario de logueo -->
@@ -28,9 +28,16 @@
                 {{form.as_ul}}
 
                 <!-- Boton de login -->
-                <button>Login</button>
+                <button>Log in</button>
 
             </form>
+
+            <!-- Muestra retorno a Restablecer contraseña -->
+            <p> </p>
+            <a href="{% url 'password_reset' %}"> Olvidaste tu contraseña? </a>
+            <p> </p>
+
+
         {% endblock %}
 
     </body>
