@@ -3,8 +3,8 @@ version: '3.9'
 services: 
     db:
         image: postgres
-        # volumes: 
-        #    - ./data/db:/var/lib/postgresql/data
+        volumes: 
+            - ./data/db:/var/lib/postgresql/data
         environment: 
             - POSTGRES_DB=postgres
             - POSTGRES_USER=postgres
@@ -14,7 +14,9 @@ services:
 
     web:
         build: .
-        command: python manage.py runserver 0.0.0.0:8000
+        command: > 
+            /bin/bash -c "chmod +x setsuperuser.sh 
+            && ./setsuperuser.sh"
         volumes: 
             - .:/code
         ports:
