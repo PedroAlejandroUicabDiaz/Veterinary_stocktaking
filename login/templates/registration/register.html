@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <title>Register</title>
+        <title>Registrate</title>
     </head>
 
     <body>
@@ -14,10 +14,10 @@
         <!-- Abre un bloque de contenido -->
         {% block content %}
 
-            <h1>Create New Account</h1>
+            <h1>Crea un nuevo usuario</h1>
 
             <!-- Muestra retorno a Homepage -->
-            <a href="{% url 'home' %}"> Homepage </a>
+            <a href="{% url 'home' %}"> Inicio </a>
             <p> </p>
 
             <!-- Abre un formulario de registro de usuario -->
@@ -28,7 +28,7 @@
                 {{form.as_ul}}
 
                 <!-- Boton de register -->
-                <button>Register</button>
+                <button>Registrate</button>
                 
             </form>
         {% endblock %}

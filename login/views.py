@@ -1,6 +1,8 @@
-from django.http.response import HttpResponse
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.views.generic import CreateView
+from django.urls import reverse_lazy 
+from login.forms import RegistroForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -8,42 +10,19 @@ from django.contrib.auth.decorators import login_required
 # Vista principal de la App de Login
 def indexView(request):
      return render(request,'index.html')
-    # url = http://localhost:8000/applogin/home/
+# url = http://localhost:8000/applogin/home/
 
 
-# Vista del menu dashboard de la App Login (reuiqeres estar logueado para acceder)
+# Vista del menu dashboard de la App Log in (reuiqeres estar logueado para acceder)
 @login_required
 def dashboardView(request):
     return render(request,'dashboard.html')
 # url = http://localhost:8000/applogin/dashboard/
 
+# Clase para la Vista Register (forms.py)
+class RegistroUsuario(CreateView):
+    model = User
+    template_name= 'registration/register.html'
+    form_class = RegistroForm
+    success_url = reverse_lazy('login_url')
 
-# Vista para registro del usuario nuevo
-def registerView(request):
-
-    # Si ya se mando algo
-    if request.method == "POST":
-
-        # Crea un formulario con lo que se mando
-        form = UserCreationForm(request.POST)
-
-        # Si el formulario es valido
-        if form.is_valid():
-
-            # Guardalo y redirecciona 
-            form.save()
-            return redirect('login_url')
-
-        else:
-            return HttpResponse('Datos no aceptados! \nIncumplimiento de lineamientos o el usuario ya esta registrado!')
-    
-    # Al principio no se ha mandado nada
-    else:
-        # Crea el formulario vacio
-        form = UserCreationForm()
-
-    return render(request,'registration/register.html',{'form':form})
-    # url = http://localhost:8000/applogin/register/
-
-
-    # url de pagina de login = http://localhost:8000/applogin/login/ 
