@@ -16,6 +16,7 @@ services:
             interval: 10s
             timeout: 5s
             retries: 10
+        stop_grace_period: 60s
 
     web:
         build: .
