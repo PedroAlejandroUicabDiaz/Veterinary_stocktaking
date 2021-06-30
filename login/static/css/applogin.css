@@ -1,0 +1,50 @@
+body{
+    background: url(fondo1.jpg);
+}
+
+.text_content {
+    padding-top: 200px;
+    text-align: center;
+}
+        
+#header {
+        margin: left;
+        width: 150px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+ul,ol {
+    list-style: none;
+}
+.nav>li {
+    float: left;
+}
+.nav li a {
+    background-color: rgb(255, 255, 255);
+    text-decoration: none;
+    text-emphasis-color: black;
+    padding: 10px 12px;
+    display: block;
+}
+
+.nav li a:hover {
+    background-color: #8aa9ff;
+}
+
+.nav li ul {
+    display: none;
+    position: absolute;
+    min-width: 140px;
+}
+
+.nav li:hover>ul {
+    display: block;
+}
+
+.nav li ul li {
+    position: relative;
+}
+
+.nav li ul li ul {
+    right: -140px;
+    top: 0px;
+}

@@ -1,38 +1,149 @@
 <!-- Vista Homepage de la App Login -->
+{% load static %}
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>Inicio</title>
-    </head>
+<head>
+    <title>Inicio</title>
 
-    <body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    
+    {% block stylesheet %}{% endblock %}
+    <style>
 
-        <!-- Abre un bloque de contenido -->
-        {% block content %}
+body{
+    background-color: rgb(171, 224, 233);
+}
 
-            <h1>Bienvenido al Inicio!</h1>
+.text_content {
+    padding-top: 200px;
+    text-align: center;
+}
+        
+#header {
+        margin: left;
+        width: 150px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+ul,ol {
+    list-style: none;
+}
+.nav>li {
+    float: left;
+}
+.nav li a {
+    background-color: rgb(255, 255, 255);
+    text-decoration: none;
+    text-emphasis-color: black;
+    padding: 10px 12px;
+    display: block;
+}
 
-            <!-- Si el usuario ya esta logueado -->
-            {% if user.is_authenticated %}
+.nav li a:hover {
+    background-color: #8aa9ff;
+}
 
-                <!-- Muestra retorno para logout y dashboard -->
-                <a href="{% url 'logout' %}">Log out</a>
-                <p> </p>
-                <a href="{% url 'dashboard' %}">Dashboard</a>
+.nav li ul {
+    display: none;
+    position: absolute;
+    min-width: 140px;
+}
 
-                <!-- Si no esta logueado -->
+.nav li:hover>ul {
+    display: block;
+}
+
+.nav li ul li {
+    position: relative;
+}
+
+.nav li ul li ul {
+    right: -140px;
+    top: 0px;
+}
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Abre un bloque de contenido -->
+    {% block body %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Inventario</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                    </li>
+
+                </ul>
+                {% if user.is_authenticated %}
+                <div id="header">
+                    <ul class="nav">
+                        <li><a href="">Opciones</a>
+                            <ul>
+                                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                                <li> <a href="{% url 'password_change' %}"> Cambio de Contraseña </a></li>
+                                <li><a href="{% url 'logout' %}">Log out</a></li>
+                            </ul>
+                        </li>
+
+                </div>
+
                 {% else %}
+                <form class="form-inline my-2 my-lg-0">
+                    <a href="{% url 'login_url' %}" class="btn btn-secondary">Log in</a>
+                    <a href="{% url 'register_url' %}" class="btn btn-primary m-lg-2">Registrate</a>
 
-                <!-- Muestra retorno a login y register -->
-                <a href="{% url 'login_url' %}">Log in</a>
-                <p> </p>
-                <a href="{% url 'register_url' %}">Registrate</a>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <!--
+    <div class="text_content">
+        <h1>Bienvenido al Inicio!</h1>
 
-            {% endif %}
+         Si el usuario ya esta logueado 
+        {% if user.is_authenticated %}
+        <!- Muestra retorno para logout y dashboard 
+        <a href="{% url 'logout' %}">Log out</a>
+        <p> </p>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
 
-        {% endblock %}
+        <!- Si no esta logueado 
+        {% else %}
 
-    </body>
+        <!-  Muestra retorno a login y register 
+        <a href="{% url 'login_url' %}">Log in</a>
+        <p> </p>
+        <a href="{% url 'register_url' %}">Registrate</a>
+
+        {% endif %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+        -->
+
+    {% endblock body %}
+    </div>
+
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block javascript %}{% endblock %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42049022-13"></script>
+
+</body>
 
 </html>

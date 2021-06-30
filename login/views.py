@@ -4,12 +4,14 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy 
 from login.forms import RegistroForm
 from django.contrib.auth.decorators import login_required
-
+from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 # Create your views here.
 
 # Vista principal de la App de Login
 def indexView(request):
-     return render(request,'index.html')
+     return render(request,'home.html')
 # url = http://localhost:8000/applogin/home/
 
 
