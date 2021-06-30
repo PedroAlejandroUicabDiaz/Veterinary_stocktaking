@@ -1,38 +1,75 @@
 <!-- Vista Register de la App Login -->
+
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>Registrate</title>
-    </head>
+<head>
+    <title>Registrate</title>
 
-    <body>
+    <style>
+        .container {
+            background-color: rgb(204, 241, 227);
+            position: relative;
+            margin: center;
+        }
+    </style>
+</head>
 
-        <!-- No se que hace el extends jeje -->
-        {% extends 'index.html' %}
+<body>
 
-        <!-- Abre un bloque de contenido -->
-        {% block content %}
+    <!-- No se que hace el extends jeje -->
+    {% extends 'index.html' %}
 
-            <h1>Crea un nuevo usuario</h1>
+    <!-- Abre un bloque de contenido -->
+    {% block content %}
 
-            <!-- Muestra retorno a Homepage -->
-            <a href="{% url 'home' %}"> Inicio </a>
-            <p> </p>
+    <!-- Muestra retorno a Homepage -->
+    <a href="{% url 'home' %}"> Inicio </a>
+    <p> </p>
 
-            <!-- Abre un formulario de registro de usuario -->
-            <form method="POST">
-                {% csrf_token %}
+    <!-- Abre un formulario de registro de usuario -->
+    <form method="POST">
 
-                <!-- Presentalo como una lista -->
-                {{form.as_ul}}
+        {% csrf_token %}
+        <div class="container">
+            <h1> Crea nuevo usuario</h1>
+            <div class="con1">
+                {{form.username.label}}
+                {{form.username}}
+            </div>
+            <div class="con2">
+                {{form.first_name.label}}
+                {{form.first_name}}
+            </div>
+            <div class="con3">
+                {{form.last_name.label}}
+                {{form.last_name}}
+            </div>
+            <div class="con4">
+                {{form.email.label}}
+                {{form.email}}
+            </div>
+            <div class="con5">
+                {{form.password1.label}}
+                {{form.password1}}
+            </div>
+            <div class="con6">
+                {{form.password2.label}}
+                {{form.password2}}
+            </div>
+            <button>Registrate</button>
+        </div>
 
-                <!-- Boton de register -->
-                <button>Registrate</button>
-                
-            </form>
-        {% endblock %}
 
-    </body>
+
+        <!-- Presentalo como una lista -->
+        <!--{{form.as_ul}}-->
+
+    
+
+    </form>
+    {% endblock %}
+
+</body>
 
 </html>

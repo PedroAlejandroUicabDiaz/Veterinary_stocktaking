@@ -2,44 +2,37 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>Log in</title>
-    </head>
+<head>
+    <title>Log in</title>
+</head>
 
-    <body>
+<body>
 
-        <!-- No se que hace el extends jeje -->
-        {% extends 'index.html' %}
+    {% extends 'index.html' %}
 
-        <!-- Abre un bloque de contenido -->
-        {% block content %}
+    <!-- Abre un bloque de contenido -->
 
-            <h1>Log in</h1>
+    {% block content %}
+    <h1>Login </h1>
 
-            <!-- Muestra retorno a Homepage -->
-            <a href="{% url 'home' %}"> Inicio </a>
-            <p> </p>
+    <form method='POST'>
+        {% csrf_token %}
 
-            <!-- Abre un formulario de logueo -->
-            <form method='POST'>
-                {% csrf_token %}
+        <!-- Presentalo como una lista -->
+        {{form.as_ul}}
 
-                <!-- Presentalo como una lista -->
-                {{form.as_ul}}
+        <!-- Boton de login -->
+        <button>Log in</button>
 
-                <!-- Boton de login -->
-                <button>Log in</button>
+    </form>
 
-            </form>
+    <!-- Muestra retorno a Restablecer contraseña -->
+    <p> </p>
+    <a href="{% url 'password_reset' %}"> Olvidaste tu contraseña? </a>
+    <p> </p>
 
-            <!-- Muestra retorno a Restablecer contraseña -->
-            <p> </p>
-            <a href="{% url 'password_reset' %}"> Olvidaste tu contraseña? </a>
-            <p> </p>
+    {% endblock %}
 
-
-        {% endblock %}
-
-    </body>
+</body>
 
 </html>
