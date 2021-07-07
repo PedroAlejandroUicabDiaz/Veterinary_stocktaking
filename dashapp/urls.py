@@ -4,8 +4,11 @@ from . import views
 
 urlpatterns = [
 
-    # path a dashboard de App Dash
+    # path del dashboard de appdash
     path('dash/',views.dashboardView, name = "dash"),
+
+    # path de products de appdash
+    path('products/',views.productView, name = "products"),
 
 ]
 
