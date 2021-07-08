@@ -1,20 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NewDashboard</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        #greeting {
+            margin-bottom: 50px;
+        }
+
+        #total-categories {
+            width: 20rem;
+            margin: auto;
+        }
+    </style>
 </head>
+
 <body>
     {% extends 'index.html' %}
 
     <!-- Abre un bloque de contenido -->
     {% block content %}
 
-    <h1>Hola {{user.username}}, bienvenido al panel de administracion</h1>
-    <p>Te has logeado nuevamente a la nueva dashboard</p>
+    <h1 id="greeting">Hola {{user.username}}, bienvenido al panel de administracion</h1>
+    <div class="row">
+        <div class="col">
+            <div class="col-sm-12">
+                <div class="card text-center text-white bg-info mb-3" id="total-categories">
+                    <div class="card-header">
+                        <h5 class="card-header">Categorias Existentes</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!--Search bar-->
+    <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <form action="get">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!--Tabla de productos full-->
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Productos</h5>
+            </div>
+            <div class="card card-body">
+                <table class="table">
+                    <tr>
+                        <th>Producto KSU</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Location</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 
     {% endblock %}
 </body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
 </html>
