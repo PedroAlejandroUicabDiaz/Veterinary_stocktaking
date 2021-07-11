@@ -19,5 +19,11 @@ urlpatterns = [
      # path del form-remove products de appdash
     path('removeProduct/<str:pk>/',views.removeProductView, name = "removeProducts"),
 
+     # path del form-create Location de appdash
+    path('createLocation/',views.createLocationView, name = "createLocation"),
+
+    # path del form-update Location de appdash
+    path('updateLocation/',views.updateLocationView, name = "updateLocation"),
+
 ]
 

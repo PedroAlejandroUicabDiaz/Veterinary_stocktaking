@@ -15,10 +15,14 @@
 
         }
 
+        h3 {
+            padding-bottom: 8px;
+        }
+
         /*Tarjetas del panel de admin*/
         #tarjeta-bienvenida1 {
             font-style: italic;
-            width: 25rem;
+            width: 20rem;
             margin: auto;
             padding-top: 0rem;
             border-radius: 10px;
@@ -26,7 +30,7 @@
 
         #tarjeta-bienvenida2 {
             font-style: italic;
-            width: 25rem;
+            width: 20rem;
             margin: auto;
             padding-top: 0rem;
             border-radius: 10px;
@@ -35,14 +39,23 @@
 
         #tarjeta-bienvenida3 {
             font-style: italic;
-            width: 25rem;
+            width: 20rem;
             margin: auto;
             padding-top: 0rem;
             border-radius: 10px;
             background-color: #2FABB1;
         }
 
-        /* Boton agrupado de la tabla - se modifico a solo uno*/ 
+        #tarjeta-bienvenida4 {
+            font-style: italic;
+            width: 20rem;
+            margin: auto;
+            padding-top: 0rem;
+            border-radius: 10px;
+            background-color: #dbb330;
+        }
+
+        /* Boton agrupado de la tabla - se modifico a solo uno*/
         #btn-grp-table {
             width: 20rem;
             margin-left: auto;
@@ -72,10 +85,30 @@
         }
 
         /* Botones de la tabla actualizar y eliminar*/
-        #btn-t{
+        #btn-t {
             border-radius: 10px;
         }
 
+        /* Botones de las tarjetas de bienvenida*/
+        #btn-card-w-add{
+            border-radius: 10px;
+
+        }
+
+        #btn-card-w-verify{
+            border-radius: 10px;
+            background-color: green;
+        }
+
+        /* Opciones para el scroll-bar de la tabla*/
+        .scroll {
+            border: none;
+            padding: 5px;
+            font: 24px/36px sans-serif;
+            overflow-y: scroll;
+            font-size: 15px;
+            height: 30rem;
+        }
     </style>
 </head>
 
@@ -98,6 +131,8 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">{{total_cate}}</h3>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="">Agregar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify" href="">Inspeccionar</a>
                     </div>
                 </div>
             </div>
@@ -111,6 +146,8 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-title"> {{total_mea}}</h3>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="">Agregar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify" href="">Inspeccionar</a>
                     </div>
                 </div>
             </div>
@@ -124,10 +161,27 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">{{total_loc}}</h3>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="{% url 'createLocation' %}">Agregar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify" href="">Inspeccionar</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Tarjeta 1. Expiracion de productos-->
+        <div class="col">
+            <div class="col-sm-12">
+                <div class="card text-center text-white mb-3" id="tarjeta-bienvenida4">
+                    <div class="card-header">
+                        <h5 class="card-header">Productos por caducar</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{expiration_products}}</h3>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify" href="">Inspeccionar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <br>
 
@@ -154,44 +208,51 @@
         <!--Tarjeta para la tabla-->
         <div class="col-md">
             <div class="card card-body text-center" id="card-table">
-                <table class="table">
-                    <!-- Atributos de la tabla-->
-                    <tr>
-                        <th>Producto KSU</th>
-                        <th>Categoria</th>
-                        <th>Medida</th>
-                        <th>Ubicacion</th>
-                        <th>Descripcion</th>
-                        <th>Marca</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Fecha de agregacion</th>
-                        <th>Fecha de caducidad</th>
-                        <th>Costo por unidad</th>
-                        <th>Actualizar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                    {% for i in products %}
+                <!--Añade un scroll bar en la tarjeta de la tabla-->
+                <div class="scroll">
+                    <table class="table">
+                        <!-- Atributos de la tabla-->
                         <tr>
-                           <td> {{i.SKU_id}}</td>
-                           <td> {{i.CATE_id}}</td>
-                           <td> {{i.MEA_id}}</td>
-                           <td> {{i.LOC_id}}</td>
-                           <td> {{i.description_product}}</td>
-                           <td> {{i.brand_product}}</td>
-                           <td> {{i.final_price_list}}</td>
-                           <td> {{i.quantity_product}}</td>
-                           <td> {{i.agregation_date}}</td>
-                           <td> {{i.expiration_date}}</td>
-                           <td> {{i.cost_unit}}</td>
-                           <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="{% url 'updateProducts' i.SKU_id %}">Actualizar</a></td>
-                           <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="{% url 'removeProducts' i.SKU_id %}">Eliminar</a></td>
+                            <th>Producto KSU</th>
+                            <th>Categoria</th>
+                            <th>Medida</th>
+                            <th>Ubicacion</th>
+                            <th>Descripcion</th>
+                            <th>Marca</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Fecha de agregacion</th>
+                            <th>Fecha de caducidad</th>
+                            <th>Costo por unidad</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        {% for i in products %}
+                        <tr>
+                            <td> {{i.SKU_id}}</td>
+                            <td> {{i.CATE_id}}</td>
+                            <td> {{i.MEA_id}}</td>
+                            <td> {{i.LOC_id}}</td>
+                            <td> {{i.description_product}}</td>
+                            <td> {{i.brand_product}}</td>
+                            <td> {{i.final_price_list}}</td>
+                            <td> {{i.quantity_product}}</td>
+                            <td> {{i.agregation_date}}</td>
+                            <td> {{i.expiration_date}}</td>
+                            <td> {{i.cost_unit}}</td>
+                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t"
+                                    href="{% url 'updateProducts' i.SKU_id %}">Actualizar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t"
+                                    href="{% url 'removeProducts' i.SKU_id %}">Eliminar</a></td>
 
                         </tr>
-                    {% endfor %}
-                </table>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
         </div>
+
+    </div>
     </div>
 
     {% endblock %}
