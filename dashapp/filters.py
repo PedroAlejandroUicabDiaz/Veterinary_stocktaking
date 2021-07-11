@@ -1,4 +1,4 @@
-from django.db.models import fields
+#from django.db.models import fields
 import django_filters
 from .models import *
 

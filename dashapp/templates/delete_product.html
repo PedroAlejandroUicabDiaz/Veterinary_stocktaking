@@ -2,22 +2,23 @@
 <html lang="en">
 
 <head>
-    <title>Productos</title>
+    <title>DeleteProduct</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
     {% extends 'index.html' %}
-
     <!-- Abre un bloque de contenido -->
     {% block content %}
 
-    <h1>Hola {{user.username}}, estos son tus productos</h1>
-    <p>Aqui podras encontrar la lista de todos tus productos en existencia.</p>
-
+    <p>Estas seguro que queires eliminar el producto: "{{item}}" ?</p>
+    <form action="{% url 'removeProducts' item.SKU_id %}" method="POST">
+        {% csrf_token %}
+        <a href="{% url 'dash' %}">Cancelar</a>
+        <input type="submit" name="Confimar">
+    </form>
     {% endblock %}
-
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
