@@ -29,7 +29,7 @@ def dashboardView(request):
 
     myFilter = StocktakingFilter()
 
-    context_va = {'products':products, 'total_cate':total_cate, 'total_mea':total_mea, 'total_loc':total_loc,'expiration_products':dates ,'myFilter':myFilter}
+    context_va = {'products':products, 'categories':categories, 'measureds':measureds, 'locations':locations, 'total_cate':total_cate, 'total_mea':total_mea, 'total_loc':total_loc,'expiration_products':dates ,'myFilter':myFilter}
 
     return render(request,'dash.html', context_va)
 
@@ -108,4 +108,4 @@ def updateLocationView(request, pk):
             #return redirect('dashboardView')
 
     context = {'form':form}
-    return render(request,'product_form.html', context)
+    return render(request,'location_form.html', context)

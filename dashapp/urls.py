@@ -23,7 +23,7 @@ urlpatterns = [
     path('createLocation/',views.createLocationView, name = "createLocation"),
 
     # path del form-update Location de appdash
-    path('updateLocation/',views.updateLocationView, name = "updateLocation"),
+    path('updateLocation/<str:pk>/',views.updateLocationView, name = "updateLocation"),
 
 ]
 

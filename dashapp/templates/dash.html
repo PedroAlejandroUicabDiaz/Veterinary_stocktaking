@@ -15,6 +15,13 @@
 
         }
 
+        h2 {
+            margin-top: 15px;
+            margin-bottom: 45px;
+            margin-left: 17px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
         h3 {
             padding-bottom: 8px;
         }
@@ -75,11 +82,23 @@
             border-radius: 10px;
         }
 
-        /*Tarjeta de la tabla*/
-        #card-table {
+        /*Tarjeta de la tabla principal STOCKTAKING*/
+        #card-table-st {
             margin: auto;
             background-color: white;
             width: 98%;
+            padding-right: .5cm;
+            border-radius: 10px;
+        }
+
+        /* Tarjeta de la tabla secundaria CATEGORIA*/
+        #card-table-sec {
+            margin: auto;
+            background-color: white;
+            width: 95%;
+            height: 50%;
+            margin: auto;
+            margin-top: 10px;
             padding-right: .5cm;
             border-radius: 10px;
         }
@@ -90,12 +109,12 @@
         }
 
         /* Botones de las tarjetas de bienvenida*/
-        #btn-card-w-add{
+        #btn-card-w-add {
             border-radius: 10px;
 
         }
 
-        #btn-card-w-verify{
+        #btn-card-w-verify {
             border-radius: 10px;
             background-color: green;
         }
@@ -127,12 +146,13 @@
             <div class="col-sm-12">
                 <div class="card text-center text-white bg-info mb-3" id="tarjeta-bienvenida1">
                     <div class="card-header">
-                        <h5 class="card-header">Categorias Existentes</h5>
+                        <h5 class="card-header">Categorias existentes</h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">{{total_cate}}</h3>
                         <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="">Agregar</a>
-                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify" href="">Inspeccionar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify"
+                            href="#Secondary-table-sec">Inspeccionar</a>
                     </div>
                 </div>
             </div>
@@ -142,12 +162,13 @@
             <div class="col-sm-12">
                 <div class="card text-center text-white mb-3" id="tarjeta-bienvenida2">
                     <div class="card-header">
-                        <h5 class="card-header">Medidas</h5>
+                        <h5 class="card-header">Medidas existentes</h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title"> {{total_mea}}</h3>
                         <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="">Agregar</a>
-                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify" href="">Inspeccionar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify"
+                            href="#Secondary-table-sec">Inspeccionar</a>
                     </div>
                 </div>
             </div>
@@ -161,8 +182,10 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">{{total_loc}}</h3>
-                        <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="{% url 'createLocation' %}">Agregar</a>
-                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify" href="">Inspeccionar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-add"
+                            href="{% url 'createLocation' %}">Agregar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify"
+                            href="#Secondary-table-sec">Inspeccionar</a>
                     </div>
                 </div>
             </div>
@@ -184,9 +207,9 @@
 
     </div>
     <br>
-
-    <!--Footer-->
-    <div class="row">
+    <br>
+    <!--Body 2.1-->
+    <div class="row" id="Main-table-sec">
         <!--Tarjeta para el filter mismo nivel-->
         <div class="col">
             <div class="card card-body" id="s-bar">
@@ -201,13 +224,14 @@
         <div class="col">
             <!-- Botones en la tabla para añadir, remover y actualizar los productos-->
             <div class="btn-group" role="group" id="btn-grp-table">
-                <a class="btn btn-primary btn-sm" id="btn-t" href="{% url 'createProducts' %}">Agregar</a>
+                <a class="btn btn-primary btn-sm" id="btn-t" href="{% url 'createProducts' %}">Agregar producto</a>
             </div>
+
         </div>
 
         <!--Tarjeta para la tabla-->
         <div class="col-md">
-            <div class="card card-body text-center" id="card-table">
+            <div class="card card-body text-center" id="card-table-st">
                 <!--Añade un scroll bar en la tarjeta de la tabla-->
                 <div class="scroll">
                     <table class="table">
@@ -251,8 +275,94 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <br>
+    <br>
+    <!--Footer-->
+    <div class="row" id="Secondary-table-sec">
+        <h2>Tablas secundarias</h2>
+        <!--First table-->
+        <div class="col-md">
+            
+            <div class="card card-body text-center" id="card-table-sec">
+                <h5 class="card-title">CATEGORIAS</h5>
+                <!--Añade un scroll bar en la tarjeta de la tabla-->
+                <div class="scroll">
+                    <table class="table">
+                        <!-- Atributos de la tabla categoria-->
+                        <tr>
+                            <th>Id</th>
+                            <th>Categorias</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        {% for i in categories %}
+                        <tr>
+                            <td>{{i.CATE_id}}</td>
+                            <td>{{i.category_name}}</td>
+                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="">Actualizar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="">Eliminar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--Second table-->
+        <div class="col-md">
+            <div class="card card-body text-center" id="card-table-sec">
+                <!--Añade un scroll bar en la tarjeta de la tabla-->
+                <h5 class="card-title">MEDIDAS</h5>
+                <div class="scroll">
+                    <table class="table">
+                        <!-- Atributos de la tabla categoria-->
+                        <tr>
+                            <th>Id</th>
+                            <th>Medidas</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        {% for i in measureds %}
+                        <tr>
+                            <td>{{i.MEA_id}}</td>
+                            <td>{{i.measured_catalog}}</td>
+                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="">Actualizar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="">Eliminar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third table-->
+        <div class="col-md">
+            <div class="card card-body text-center" id="card-table-sec">
+                <h5 class="card-title">UBICACIONES</h5>
+                <!--Añade un scroll bar en la tarjeta de la tabla-->
+                <div class="scroll">
+                    <table class="table">
+                        <!-- Atributos de la tabla categoria-->
+                        <tr>
+                            <th>Id</th>
+                            <th>Ubicaciones</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        {% for i in locations %}
+                        <tr>
+                            <td>{{i.LOC_id}}</td>
+                            <td>{{i.location_product}}</td>
+                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="{% url 'updateLocation' i.LOC_id %}">Actualizar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="">Eliminar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     {% endblock %}
