@@ -26,7 +26,7 @@ urlpatterns = [
     name = 'password_change'),
 
     # path a password_change_done template
-    path('poassword_change_done/',auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'),
+    path('password_change_done/',auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'),
     name= 'password_change_done'),
 
     # path a password_reset template
