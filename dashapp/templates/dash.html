@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        /* Mensaje Inicial*/
+        #greeting {
+            margin-top: 15px;
+            margin-bottom: 45px;
+            margin-left: 17px;
+            font-family: 'Segoe UI', sans-serif;
+
+        }
+
+        h2 {
+            margin-top: 15px;
+            margin-bottom: 45px;
+            margin-left: 17px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        h3 {
+            padding-bottom: 8px;
+        }
+
+        /*Tarjetas del panel de admin*/
+        #tarjeta-bienvenida1 {
+            font-style: italic;
+            width: 20rem;
+            margin: auto;
+            padding-top: 0rem;
+            border-radius: 10px;
+        }
+
+        #tarjeta-bienvenida2 {
+            font-style: italic;
+            width: 20rem;
+            margin: auto;
+            padding-top: 0rem;
+            border-radius: 10px;
+            background-color: #0AFFEF;
+        }
+
+        #tarjeta-bienvenida3 {
+            font-style: italic;
+            width: 20rem;
+            margin: auto;
+            padding-top: 0rem;
+            border-radius: 10px;
+            background-color: #2FABB1;
+        }
+
+        #tarjeta-bienvenida4 {
+            font-style: italic;
+            width: 20rem;
+            margin: auto;
+            padding-top: 0rem;
+            border-radius: 10px;
+            background-color: #dbb330;
+        }
+
+        /* Boton agrupado de la tabla - se modifico a solo uno*/
+        #btn-grp-table {
+            width: 20rem;
+            margin-left: auto;
+            padding-bottom: 5px;
+            padding-top: 5px;
+        }
+
+        /* Barra para el filtro*/
+        #s-bar {
+            background-color: white;
+            margin-top: 0px;
+            margin-left: 15px;
+            margin-bottom: 2px;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            width: 70.5rem;
+            border-radius: 10px;
+        }
+
+        /*Tarjeta de la tabla principal STOCKTAKING*/
+        #card-table-st {
+            margin: auto;
+            background-color: white;
+            width: 98%;
+            padding-right: .5cm;
+            border-radius: 10px;
+        }
+
+        /* Tarjeta de la tabla secundaria CATEGORIA*/
+        #card-table-sec {
+            margin: auto;
+            background-color: white;
+            width: 95%;
+            height: 50%;
+            margin: auto;
+            margin-top: 10px;
+            padding-right: .5cm;
+            border-radius: 10px;
+        }
+
+        /* Botones de la tabla actualizar y eliminar*/
+        #btn-t {
+            border-radius: 10px;
+        }
+
+        /* Botones de las tarjetas de bienvenida*/
+        #btn-card-w-add {
+            border-radius: 10px;
+
+        }
+
+        #btn-card-w-verify {
+            border-radius: 10px;
+            background-color: green;
+        }
+
+        /* Opciones para el scroll-bar de la tabla*/
+        .scroll {
+            border: none;
+            padding: 5px;
+            font: 24px/36px sans-serif;
+            overflow-y: scroll;
+            font-size: 15px;
+            height: 30rem;
+        }
+    </style>
+</head>
+
+<body>
+    {% extends 'index.html' %}
+    <!-- Abre un bloque de contenido -->
+    {% block content %}
+
+    <!--Mensaje de bienvenida al usuario HEADER-->
+    <h1 id="greeting">Hola {{user.username}}, bienvenido al panel de administracion</h1>
+
+    <!--Tarjetas para las categorias BODY-->
+    <div class="row">
+        <!-- Tarjeta 1. CATEGORIAS-->
+        <div class="col">
+            <div class="col-sm-12">
+                <div class="card text-center text-white bg-info mb-3" id="tarjeta-bienvenida1">
+                    <div class="card-header">
+                        <h5 class="card-header">Categorias existentes</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{total_cate}}</h3>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="">Agregar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify"
+                            href="#Secondary-table-sec">Inspeccionar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Tarjeta 2. MEDIDAS de los productos -->
+        <div class="col">
+            <div class="col-sm-12">
+                <div class="card text-center text-white mb-3" id="tarjeta-bienvenida2">
+                    <div class="card-header">
+                        <h5 class="card-header">Medidas existentes</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title"> {{total_mea}}</h3>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="">Agregar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify"
+                            href="#Secondary-table-sec">Inspeccionar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tarejeta 3. UBICACION del producto en la veterinaria-->
+        <div class="col">
+            <div class="col-sm-12">
+                <div class="card text-center text-white mb-3" id="tarjeta-bienvenida3">
+                    <div class="card-header">
+                        <h5 class="card-header">Ubicaciones disponibles</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{total_loc}}</h3>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-add"
+                            href="{% url 'createLocation' %}">Agregar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify"
+                            href="#Secondary-table-sec">Inspeccionar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta 1. Expiracion de productos-->
+        <div class="col">
+            <div class="col-sm-12">
+                <div class="card text-center text-white mb-3" id="tarjeta-bienvenida4">
+                    <div class="card-header">
+                        <h5 class="card-header">Productos por caducar</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{expiration_products}}</h3>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-verify" href="">Inspeccionar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <!--Body 2.1-->
+    <div class="row" id="Main-table-sec">
+        <!--Tarjeta para el filter mismo nivel-->
+        <div class="col">
+            <div class="card card-body" id="s-bar">
+                <form action="get">
+                    {{myfilter}}
+                    <button type="submit" class="btn btn-primary btn-sm" id="btn-t">Filtrar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tarjeta para botones-->
+        <div class="col">
+            <!-- Botones en la tabla para añadir, remover y actualizar los productos-->
+            <div class="btn-group" role="group" id="btn-grp-table">
+                <a class="btn btn-primary btn-sm" id="btn-t" href="{% url 'createProducts' %}">Agregar producto</a>
+            </div>
+
+        </div>
+
+        <!--Tarjeta para la tabla-->
+        <div class="col-md">
+            <div class="card card-body text-center" id="card-table-st">
+                <!--Añade un scroll bar en la tarjeta de la tabla-->
+                <div class="scroll">
+                    <table class="table">
+                        <!-- Atributos de la tabla-->
+                        <tr>
+                            <th>Producto KSU</th>
+                            <th>Categoria</th>
+                            <th>Medida</th>
+                            <th>Ubicacion</th>
+                            <th>Descripcion</th>
+                            <th>Marca</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Fecha de agregacion</th>
+                            <th>Fecha de caducidad</th>
+                            <th>Costo por unidad</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        {% for i in products %}
+                        <tr>
+                            <td> {{i.SKU_id}}</td>
+                            <td> {{i.CATE_id}}</td>
+                            <td> {{i.MEA_id}}</td>
+                            <td> {{i.LOC_id}}</td>
+                            <td> {{i.description_product}}</td>
+                            <td> {{i.brand_product}}</td>
+                            <td> {{i.final_price_list}}</td>
+                            <td> {{i.quantity_product}}</td>
+                            <td> {{i.agregation_date}}</td>
+                            <td> {{i.expiration_date}}</td>
+                            <td> {{i.cost_unit}}</td>
+                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t"
+                                    href="{% url 'updateProducts' i.SKU_id %}">Actualizar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t"
+                                    href="{% url 'removeProducts' i.SKU_id %}">Eliminar</a></td>
+
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <!--Footer-->
+    <div class="row" id="Secondary-table-sec">
+        <h2>Tablas secundarias</h2>
+        <!--First table-->
+        <div class="col-md">
+            
+            <div class="card card-body text-center" id="card-table-sec">
+                <h5 class="card-title">CATEGORIAS</h5>
+                <!--Añade un scroll bar en la tarjeta de la tabla-->
+                <div class="scroll">
+                    <table class="table">
+                        <!-- Atributos de la tabla categoria-->
+                        <tr>
+                            <th>Id</th>
+                            <th>Categorias</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        {% for i in categories %}
+                        <tr>
+                            <td>{{i.CATE_id}}</td>
+                            <td>{{i.category_name}}</td>
+                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="">Actualizar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="">Eliminar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--Second table-->
+        <div class="col-md">
+            <div class="card card-body text-center" id="card-table-sec">
+                <!--Añade un scroll bar en la tarjeta de la tabla-->
+                <h5 class="card-title">MEDIDAS</h5>
+                <div class="scroll">
+                    <table class="table">
+                        <!-- Atributos de la tabla categoria-->
+                        <tr>
+                            <th>Id</th>
+                            <th>Medidas</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        {% for i in measureds %}
+                        <tr>
+                            <td>{{i.MEA_id}}</td>
+                            <td>{{i.measured_catalog}}</td>
+                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="">Actualizar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="">Eliminar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third table-->
+        <div class="col-md">
+            <div class="card card-body text-center" id="card-table-sec">
+                <h5 class="card-title">UBICACIONES</h5>
+                <!--Añade un scroll bar en la tarjeta de la tabla-->
+                <div class="scroll">
+                    <table class="table">
+                        <!-- Atributos de la tabla categoria-->
+                        <tr>
+                            <th>Id</th>
+                            <th>Ubicaciones</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        {% for i in locations %}
+                        <tr>
+                            <td>{{i.LOC_id}}</td>
+                            <td>{{i.location_product}}</td>
+                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="{% url 'updateLocation' i.LOC_id %}">Actualizar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="">Eliminar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</html>

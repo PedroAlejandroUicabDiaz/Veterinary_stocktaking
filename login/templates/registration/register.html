@@ -1,5 +1,6 @@
 <!-- Vista Register de la App Login -->
-
+<!-- No se que hace el extends jeje -->
+{% extends 'index.html' %}
 <!DOCTYPE html>
 <html>
 
@@ -7,66 +8,101 @@
     <title>Registrate</title>
 
     <style>
-        .container {
-            background-color: rgb(204, 241, 227);
-            position: relative;
-            margin: center;
+        button {
+            position: absolute;
+            top: 80%;
+            left: 42%;
+            margin: -25px 0 0 -25px;
+            border: solid #45679e;
+            /*anchura, estilo y color borde*/
+            padding: 5px;
+            /*espacio alrededor texto*/
+            background-color: #2e518b;
+            /*color botón*/
+            color: #ffffff;
+            /*color texto*/
+            text-decoration: rgb(255, 255, 255);
+            /*decoración texto*/
+            text-transform: uppercase;
+            /*capitalización texto*/
+            font-family: 'Helvetica', sans-serif;
+            /*tipografía texto*/
+            border-radius: 50px;
+            /*bordes redondos*/
+        }
+
+        .foot-lnk {
+            padding-top: 10px;
+
+        }
+        .contraseña{
+            padding-top: 500%;
         }
     </style>
 </head>
 
 <body>
-
-    <!-- No se que hace el extends jeje -->
-    {% extends 'index.html' %}
-
     <!-- Abre un bloque de contenido -->
     {% block content %}
 
-    <!-- Muestra retorno a Homepage -->
-    <a href="{% url 'home' %}"> Inicio </a>
-    <p> </p>
+    <!-- Muestra retorno a Homepage --
+    <a href="{% url 'home' %}"> Inicio </a>-->
+    <p> ㅤ ㅤ</p>
 
     <!-- Abre un formulario de registro de usuario -->
     <form method="POST">
-
         {% csrf_token %}
-        <div class="container">
-            <h1> Crea nuevo usuario</h1>
-            <div class="con1">
-                {{form.username.label}}
-                {{form.username}}
+        <div class="login-wrap">
+            <div class="login-html">
+                <div class="contraseña">
+                    <h1>ㅤㅤㅤRegistroㅤㅤㅤ</h1>
+                </div>
             </div>
-            <div class="con2">
-                {{form.first_name.label}}
-                {{form.first_name}}
+            <div class="login-form">
+                <div class="group">
+                    <div class="label">
+                        {{form.username.label}}
+                    </div>
+                    {{form.username}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.first_name.label}}
+                    </div>
+                    {{form.first_name}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.last_name.label}}
+                    </div>
+                    {{form.last_name}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.email.label}}
+                    </div>
+                    {{form.email}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.password1.label}}
+                    </div>
+                    {{form.password1}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.password2.label}}
+                    </div>
+                    {{form.password2}}
+                </div>
+                <div class="boton">
+                    <button>Registar</button>
+                </div>
             </div>
-            <div class="con3">
-                {{form.last_name.label}}
-                {{form.last_name}}
-            </div>
-            <div class="con4">
-                {{form.email.label}}
-                {{form.email}}
-            </div>
-            <div class="con5">
-                {{form.password1.label}}
-                {{form.password1}}
-            </div>
-            <div class="con6">
-                {{form.password2.label}}
-                {{form.password2}}
-            </div>
-            <button>Registrate</button>
+
         </div>
-
-
-
         <!-- Presentalo como una lista -->
         <!--{{form.as_ul}}-->
-
-    
-
     </form>
     {% endblock %}
 
