@@ -2,44 +2,80 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>Log in</title>
-    </head>
+<head>
+    <title>Log in</title>
+    <style>
+        button {
+            position: absolute;
+            top: 55%;
+            left: 42%;
+            margin: -25px 0 0 -25px;
+            
+            padding: 5px;
+            
+        }
 
-    <body>
+        .foot-lnk {
+            top: 10%;
+            padding: 110px;
+            font-size: 25px;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        
+    </style>
+</head>
 
-        <!-- No se que hace el extends jeje -->
-        {% extends 'index.html' %}
+<body>
 
-        <!-- Abre un bloque de contenido -->
-        {% block content %}
+    {% extends 'index.html' %}
 
-            <h1>Log in</h1>
+    <!-- Abre un bloque de contenido -->
 
-            <!-- Muestra retorno a Homepage -->
-            <a href="{% url 'home' %}"> Inicio </a>
-            <p> </p>
+    {% block content %}
+    <p> ㅤ ㅤ</p>
+    <form method='POST'>
+        {% csrf_token %}
 
-            <!-- Abre un formulario de logueo -->
-            <form method='POST'>
-                {% csrf_token %}
+        <!-- Presentalo como una lista -
+        {{form.as_ul}}-->
+        <!-- Boton de login -->
 
-                <!-- Presentalo como una lista -->
-                {{form.as_ul}}
+        <div class="login-wrap">
+            <div class="login-html">
+                <div class="text_login">
+                    Log in
+                </div>
+            </div>
+            <div class="login-form">
+                <div class="group">
+                    <div class="label">
+                        {{form.username.label}}
+                    </div>
+                    {{form.username}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.password.label}}
+                    </div>
+                    {{form.password}}
+                </div>
+                <div class="boton">
+                    <button>Entrar</button>
+                </div>
+                <div class="foot-lnk">
+                    <!-- Muestra retorno a Restablecer contraseña -->
+                    <a href="{% url 'password_reset' %}"> Olvidaste tu contraseña? </a>
+                </div>
+            </div>
+        </div>
+    </form>
 
-                <!-- Boton de login -->
-                <button>Log in</button>
-
-            </form>
-
-            <!-- Muestra retorno a Restablecer contraseña -->
-            <p> </p>
-            <a href="{% url 'password_reset' %}"> Olvidaste tu contraseña? </a>
-            <p> </p>
+    <!-- Muestra retorno a Restablecer contraseña -->
 
 
-        {% endblock %}
 
-    </body>
+    {% endblock %}
+
+</body>
 
 </html>

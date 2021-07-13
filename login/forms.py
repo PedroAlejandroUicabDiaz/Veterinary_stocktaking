@@ -11,6 +11,8 @@ class RegistroForm(UserCreationForm):
                 'first_name',
                 'last_name',
                 'email',
+                'password1',
+                'password2',
             ]
 
         labels = {
@@ -18,4 +20,6 @@ class RegistroForm(UserCreationForm):
                 'first_name':'Nombre',
                 'last_name':'Apellidos',
                 'email':'Correo',
+                'password1':'Contraseña',
+                'password2': 'Nueva Contraseña',
         }
