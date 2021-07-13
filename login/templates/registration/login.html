@@ -4,6 +4,25 @@
 
 <head>
     <title>Log in</title>
+    <style>
+        button {
+            position: absolute;
+            top: 55%;
+            left: 42%;
+            margin: -25px 0 0 -25px;
+            
+            padding: 5px;
+            
+        }
+
+        .foot-lnk {
+            top: 10%;
+            padding: 110px;
+            font-size: 25px;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        
+    </style>
 </head>
 
 <body>
@@ -13,23 +32,47 @@
     <!-- Abre un bloque de contenido -->
 
     {% block content %}
-    <h1>Login </h1>
-
+    <p> ㅤ ㅤ</p>
     <form method='POST'>
         {% csrf_token %}
 
-        <!-- Presentalo como una lista -->
-        {{form.as_ul}}
-
+        <!-- Presentalo como una lista -
+        {{form.as_ul}}-->
         <!-- Boton de login -->
-        <button>Log in</button>
 
+        <div class="login-wrap">
+            <div class="login-html">
+                <div class="text_login">
+                    Log in
+                </div>
+            </div>
+            <div class="login-form">
+                <div class="group">
+                    <div class="label">
+                        {{form.username.label}}
+                    </div>
+                    {{form.username}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.password.label}}
+                    </div>
+                    {{form.password}}
+                </div>
+                <div class="boton">
+                    <button>Entrar</button>
+                </div>
+                <div class="foot-lnk">
+                    <!-- Muestra retorno a Restablecer contraseña -->
+                    <a href="{% url 'password_reset' %}"> Olvidaste tu contraseña? </a>
+                </div>
+            </div>
+        </div>
     </form>
 
     <!-- Muestra retorno a Restablecer contraseña -->
-    <p> </p>
-    <a href="{% url 'password_reset' %}"> Olvidaste tu contraseña? </a>
-    <p> </p>
+
+
 
     {% endblock %}
 

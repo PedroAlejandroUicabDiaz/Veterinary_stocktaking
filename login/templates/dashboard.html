@@ -13,8 +13,19 @@
     {% block content %}
     <!--Para cambiar la posicion de cambia el nombre de la clase de text content-->
     <div class="text_content">
-        <h1>Bienvenido a Dashboard {{user.username}}</h1>
+        <h1>Bienvenido al panel de administracion {{user.username}}</h1>
     </div>
+     <!-- como el usuario debe de estar logueado 
+            {% if user.is_authenticated %}
+
+                <!- Muestra retorno para logout y dashboard 
+                <a href="{% url 'logout' %}">Log out</a> /
+                <a href="{% url 'home' %}"> Inicio </a> /
+
+                <!- Muestra retorno a Password_Change -
+                <a href="{% url 'password_change' %}"> Cambio de Contraseña </a>
+                <p> </p>
+            -->
 
     {% endif %}
 
