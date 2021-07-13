@@ -1,5 +1,6 @@
 <!-- Vista Register de la App Login -->
-
+<!-- No se que hace el extends jeje -->
+{% extends 'index.html' %}
 <!DOCTYPE html>
 <html>
 
@@ -7,66 +8,109 @@
     <title>Registrate</title>
 
     <style>
-        .container {
-            background-color: rgb(204, 241, 227);
-            position: relative;
-            margin: center;
+        .foot-lnk .group {
+            padding-top: 10px;
         }
+
+        .centrar-listas {
+            text-align: right;
+        }
+
+        .centrar-listas ul,
+        .centrar-listas ol {
+            text-align: right;
+            display: inline-block;
+        }
+        .infoo{
+            text-align: center;
+            
+        }
+    
     </style>
 </head>
 
 <body>
-
-    <!-- No se que hace el extends jeje -->
-    {% extends 'index.html' %}
-
     <!-- Abre un bloque de contenido -->
     {% block content %}
 
-    <!-- Muestra retorno a Homepage -->
-    <a href="{% url 'home' %}"> Inicio </a>
-    <p> </p>
+    <!-- Muestra retorno a Homepage --
+    <a href="{% url 'home' %}"> Inicio </a>-->
+    <p> ㅤ ㅤ</p>
 
     <!-- Abre un formulario de registro de usuario -->
     <form method="POST">
-
         {% csrf_token %}
-        <div class="container">
-            <h1> Crea nuevo usuario</h1>
-            <div class="con1">
-                {{form.username.label}}
-                {{form.username}}
+        <div class="login-wrap">
+            <div class="login-html">
+                <div class="text_registro">
+                    Registro
+                </div>
             </div>
-            <div class="con2">
-                {{form.first_name.label}}
-                {{form.first_name}}
+            <div class="login-form">
+                <div class="group">
+                   
+                    <div class="label">
+                        {{form.username.label}}
+                    </div>
+                    <div class="infoo"><p> </p>
+                        <p> </p> Longitud máxima 150 caracteres alfanuméricos. 
+                        <p> </p>
+                        Letras, dígitos y
+                        @/./+/-/_ únicamente
+                        <p> 
+                        </p>
+                    </div>
+                    {{form.username}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.first_name.label}}
+                    </div>
+                    {{form.first_name}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.last_name.label}}
+                    </div>
+                    {{form.last_name}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.email.label}}
+                    </div>
+                    {{form.email}}
+                </div>
+                <div class="group">
+                    <div class="label">
+                        {{form.password1.label}}
+                    </div>
+                    {{form.password1}}
+                </div>
+                <div class="group">
+                    <div class="centrar-listas">
+                        <ul>
+                            <li> - Su contraseña no puede ser muy similar a su otra información personal.</li>
+                            <li>- Su contraseña es muy corta. Debe contener al menos 8 caracteres.</li>
+                            <li>- Su contraseña no puede ser una contraseña de uso común.</li>
+                            <li>- Su contraseña no puede ser completamente numérica.</li>
+                        </ul>
+                    </div>
+                    <div class="label">
+                        {{form.password2.label}}
+                    </div>
+
+                    {{form.password2}}
+                </div>
+                <div class="boton">
+                    <button>Registar</button>
+                    
+                </div>
+                <p> </p>
             </div>
-            <div class="con3">
-                {{form.last_name.label}}
-                {{form.last_name}}
-            </div>
-            <div class="con4">
-                {{form.email.label}}
-                {{form.email}}
-            </div>
-            <div class="con5">
-                {{form.password1.label}}
-                {{form.password1}}
-            </div>
-            <div class="con6">
-                {{form.password2.label}}
-                {{form.password2}}
-            </div>
-            <button>Registrate</button>
+
         </div>
-
-
-
         <!-- Presentalo como una lista -->
         <!--{{form.as_ul}}-->
-
-    
-
     </form>
     {% endblock %}
 
