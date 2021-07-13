@@ -1,9 +1,13 @@
+from datetime import datetime
 from django.db.models.aggregates import Count
+from django.http import response, HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from .filters import StocktakingFilter
 from .forms import CategoryForm, MeasuredForm, LocationForm, ProductForm
 from django.utils import timezone
+import csv
+import datetime
 
 #from .urls import *
 from django.contrib.auth.decorators import login_required
@@ -34,6 +38,22 @@ def dashboardView(request):
     return render(request,'dash.html', context_va)
 
 # url = http://localhost:8000/dashapp/dash/
+
+def export_csv(request):
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition']='attachment; filename=Productos'+ \
+        str(datetime.datetime.now())+'.csv'
+    
+    writer=csv.writer(response)
+    writer.writerow(['SKU_id','CATE_id','MEA_id','LOC_id','description_product','brand_product','final_price_list','quantity_product','expiration_date','agregation_date','lastupdated_date','cost_unit'])
+
+    products = stocktaking_tb.objects.filter(SKU_id=request.user)
+
+    for product in products:
+        writer.writerow([product.SKU_I, product.CATE_id, product.MEA_id, product.LOC_id, product.description_product, product.brand_product, product.final_price_list, product.quantity_product, product.expiration_date, product.agregation_date, product.lastupdated_date, product.cost_unit])
+
+    return response
 
 # Vista de los productos de appdash in (reuiqeres estar logueado para acceder)
 @login_required

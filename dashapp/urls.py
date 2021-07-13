@@ -7,6 +7,9 @@ urlpatterns = [
     # path del dashboard de appdash
     path('dash/',views.dashboardView, name = "dash"),
 
+    # path del form-update Location de appdash
+    path('exportCSV/',views.export_csv, name = "exportCSV"),
+
     # path de products de appdash
     path('products/',views.productView, name = "products"),
 
