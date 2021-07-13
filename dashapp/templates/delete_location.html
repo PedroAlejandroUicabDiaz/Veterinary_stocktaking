@@ -5,6 +5,13 @@
     <title>DeleteLocation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        #card-remove {
+            margin: auto;
+            width: 50%;
+            margin-top: 60px;
+        }
+    </style>
 </head>
 
 <body>
@@ -12,13 +19,17 @@
     <!-- Abre un bloque de contenido -->
     {% block content %}
 
-    <p>Estas seguro que queires eliminar esta ubicacion: "{{item}}" ?</p>
-    <form action="{% url 'removeLocations' item.LOC_id %}" method="POST">
-        {% csrf_token %}
-        <a href="{% url 'dash' %}">Cancelar</a>
-        <input type="submit" name="Confimar">
-    </form>
-    {% endblock %}
+    <div class="card text-center" id="card-remove">
+        <div class="card card-body">
+            <h5 class="card-title">{{user.username}}, estas seguro que quieres eliminar esta ubicacion: "{{item}}" ?
+            </h5>
+            <form action="{% url 'removeLocations' item.LOC_id %}" method="POST">
+                {% csrf_token %}
+                <a class="btn btn-primary btn-sm" href="{% url 'dash' %}">Cancelar</a>
+                <input class="btn btn-danger btn-sm" type="submit" name="Confimar">
+            </form>
+        </div>
+        {% endblock %}
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

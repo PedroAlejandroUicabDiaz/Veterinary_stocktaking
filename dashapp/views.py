@@ -26,7 +26,7 @@ def dashboardView(request):
     #Get the current date 
     current_date = timezone.now()
     dates = stocktaking_tb.objects.filter(expiration_date=current_date).count()
-    
+
     total_cate = categories.count()
     total_mea = measureds.count()
     total_loc = locations.count()
