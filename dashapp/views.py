@@ -48,11 +48,9 @@ def export_csv(request):
     writer=csv.writer(response)
     writer.writerow(['SKU_id','CATE_id','MEA_id','LOC_id','description_product','brand_product','final_price_list','quantity_product','expiration_date','agregation_date','lastupdated_date','cost_unit'])
 
-    products = stocktaking_tb.objects.filter(SKU_id=request.user)
-
-    for product in products:
-        writer.writerow([product.SKU_I, product.CATE_id, product.MEA_id, product.LOC_id, product.description_product, product.brand_product, product.final_price_list, product.quantity_product, product.expiration_date, product.agregation_date, product.lastupdated_date, product.cost_unit])
-
+    for product in stocktaking_tb.objects.all().values_list('SKU_id','CATE_id','MEA_id','LOC_id','description_product','brand_product','final_price_list','quantity_product','expiration_date','agregation_date','lastupdated_date','cost_unit'):
+        writer.writerow(product)
+        
     return response
 
 # Vista de los productos de appdash in (reuiqeres estar logueado para acceder)
