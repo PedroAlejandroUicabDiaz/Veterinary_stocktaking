@@ -150,7 +150,7 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">{{total_cate}}</h3>
-                        <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="">Agregar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="{% url 'createCategory' %}">Agregar</a>
                         <a class="btn btn-primary btn-sm" id="btn-card-w-verify"
                             href="#Secondary-table-sec">Inspeccionar</a>
                     </div>
@@ -166,7 +166,7 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-title"> {{total_mea}}</h3>
-                        <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="">Agregar</a>
+                        <a class="btn btn-primary btn-sm" id="btn-card-w-add" href="{% url 'createMeasured' %}">Agregar</a>
                         <a class="btn btn-primary btn-sm" id="btn-card-w-verify"
                             href="#Secondary-table-sec">Inspeccionar</a>
                     </div>
@@ -301,8 +301,8 @@
                         <tr>
                             <td>{{i.CATE_id}}</td>
                             <td>{{i.category_name}}</td>
-                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="">Actualizar</a></td>
-                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="">Eliminar</a></td>
+                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="{% url 'updateCategory' i.CATE_id %}">Actualizar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="{% url 'removeCategory' i.CATE_id %}">Eliminar</a></td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -328,8 +328,8 @@
                         <tr>
                             <td>{{i.MEA_id}}</td>
                             <td>{{i.measured_catalog}}</td>
-                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="">Actualizar</a></td>
-                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="">Eliminar</a></td>
+                            <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="{% url 'updateMeasured' i.MEA_id %}">Actualizar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="{% url 'removeMeasured' i.MEA_id %}">Eliminar</a></td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -356,7 +356,7 @@
                             <td>{{i.LOC_id}}</td>
                             <td>{{i.location_product}}</td>
                             <td> <a type="button" class="btn btn-warning btn-sm" id="btn-t" href="{% url 'updateLocation' i.LOC_id %}">Actualizar</a></td>
-                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="">Eliminar</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" id="btn-t" href="{% url 'removeLocations' i.LOC_id %}">Eliminar</a></td>
                         </tr>
                         {% endfor %}
                     </table>

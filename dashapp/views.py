@@ -74,7 +74,6 @@ def createProductView(request):
 
     context = {'form':form}
     return render(request,'product_form.html', context)
-# url = http://localhost:8000/dashapp/formProducts/
 
 # Vista del form para actualizar productos (requieres estar logueado para accder)
 @login_required
@@ -91,7 +90,7 @@ def updateProductView(request, pk):
     context = {'form':form}
     return render(request,'product_form.html', context)
 
- # Vista del form para eliminar un productos (requieres estar logueado para accder)
+# Vista del form para eliminar un producto (requieres estar logueado para accder)
 @login_required
 def removeProductView(request, pk):
     product =stocktaking_tb.objects.get(SKU_id=pk)
@@ -129,3 +128,96 @@ def updateLocationView(request, pk):
 
     context = {'form':form}
     return render(request,'location_form.html', context)
+
+# Vista del form para eliminar una ubicacion (requieres estar logueado para accder)
+@login_required
+def removeLocationView(request, pk):
+    location =location_catalog.objects.get(LOC_id=pk)
+
+    if request.method == 'POST':
+        location.delete()
+        #return redirect('dashboardView')
+    context = {'item':location}
+    return render(request,'delete_location.html', context)
+
+# Vista del form para añadir categorias (requieres estar logueado para accder)
+@login_required
+def createCategoryView(request):
+    form = CategoryForm()
+
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #return redirect('dashboardView')
+
+    context = {'form':form}
+    return render(request,'categories_form.html', context)
+
+# Vista del form para añadir Medidas (requieres estar logueado para accder)
+@login_required
+def createMeasuredView(request):
+    form = MeasuredForm()
+
+    if request.method == 'POST':
+        form = MeasuredForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #return redirect('dashboardView')
+
+    context = {'form':form}
+    return render(request,'measured_form.html', context)
+
+# Vista del form para actualizar una categoria (requieres estar logueado para accder)
+@login_required
+def updateCategoryView(request, pk):
+    category =category_catalog.objects.get(CATE_id=pk)
+    form = CategoryForm(instance=category)
+
+    if request.method == 'POST':
+        form = CategoryForm(request.POST,instance=category)
+        if form.is_valid():
+            form.save()
+            #return redirect('dashboardView')
+
+    context = {'form':form}
+    return render(request,'categories_form.html', context)
+
+# Vista del form para actualizar una medida (requieres estar logueado para accder)
+@login_required
+def updateMeasuredView(request, pk):
+    measured =measured_catalog.objects.get(MEA_id=pk)
+    form = MeasuredForm(instance=measured)
+
+    if request.method == 'POST':
+        form = MeasuredForm(request.POST,instance=measured)
+        if form.is_valid():
+            form.save()
+            #return redirect('dashboardView')
+
+    context = {'form':form}
+    return render(request,'measured_form.html', context)
+
+# Vista del form para eliminar una categoria (requieres estar logueado para accder)
+@login_required
+def removeCategoryView(request, pk):
+    categoria =category_catalog.objects.get(CATE_id=pk)
+
+    if request.method == 'POST':
+        categoria.delete()
+        #return redirect('dashboardView')
+
+    context = {'item':categoria}
+    return render(request,'delete_categories.html', context)
+
+# Vista del form para eliminar una medida (requieres estar logueado para accder)
+@login_required
+def removeMeasuredView(request, pk):
+    medida = measured_catalog.objects.get(MEA_id=pk)
+
+    if request.method == 'POST':
+        medida.delete()
+        #return redirect('dashboardView')
+        
+    context = {'item':medida}
+    return render(request,'delete_measured.html', context)
