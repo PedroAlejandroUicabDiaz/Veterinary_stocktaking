@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db.models.aggregates import Count
+from django.db.models.query import QuerySet
 from django.http import response, HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
@@ -18,20 +19,24 @@ from django.contrib.auth.decorators import login_required
 # Vista del dashboard de dashapp (reuiqeres estar logueado para acceder)
 @login_required
 def dashboardView(request):
+    # Get data from databases
     products = stocktaking_tb.objects.all()
     categories = category_catalog.objects.all()
     measureds = measured_catalog.objects.all()
     locations = location_catalog.objects.all()
 
     #Get the current date 
-    current_date = timezone.now()
-    dates = stocktaking_tb.objects.filter(expiration_date=current_date).count()
+    current_month = timezone.now().month
+    dates = stocktaking_tb.objects.filter(expiration_date__contains=current_month).count()
 
+    # Total data
     total_cate = categories.count()
     total_mea = measureds.count()
     total_loc = locations.count()
 
-    myFilter = StocktakingFilter()
+    # Filter - it does not work yet
+    myFilter = StocktakingFilter(request.GET, queryset=products)
+    
 
     context_va = {'products':products, 'categories':categories, 'measureds':measureds, 'locations':locations, 'total_cate':total_cate, 'total_mea':total_mea, 'total_loc':total_loc,'expiration_products':dates ,'myFilter':myFilter}
 

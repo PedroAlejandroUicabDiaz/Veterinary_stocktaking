@@ -5,17 +5,36 @@
     <title>CreateNewCategory</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        #card-add {
+            margin: auto;
+            width: 45%;
+            margin-top: 60px;
+        }
+
+        h5 {
+            padding-top: 0px;
+            padding-bottom: 5px;
+        }
+
+    </style>
 </head>
 
 <body>
     {% extends 'index.html' %}
     <!-- Abre un bloque de contenido -->
     {% block content %}
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" name="Submit">
-    </form>
+    <div class="card text-center" id="card-add">
+        <div class="card card-body">
+            <h5 class="card-title">{{user.username}}, estas por añadir/actulizar una nueva categoria</h5>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form}}
+                <input class="btn btn-primary btn-sm" type="submit" name="Submit">
+            </form>
+        </div>
+    </div>
 
     {% endblock %}
 

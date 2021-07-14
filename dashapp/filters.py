@@ -5,4 +5,4 @@ from .models import *
 class StocktakingFilter(django_filters.FilterSet):
     class Meta:
         model = stocktaking_tb
-        fields = '__all__'
+        fields = ['SKU_id','CATE_id','LOC_id','description_product']
