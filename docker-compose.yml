@@ -30,3 +30,13 @@ services:
         depends_on:
             db:
               condition: service_healthy
+        expose: 
+            - "8000"
+
+    nginx:
+        build: ./nginx
+        ports:
+            - 1300:80
+        depends_on: 
+            - web
+        restart: "on-failure"
