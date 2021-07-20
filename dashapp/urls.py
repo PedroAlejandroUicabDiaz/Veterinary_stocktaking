@@ -7,7 +7,7 @@ urlpatterns = [
     # path del dashboard de appdash
     path('dash/',views.dashboardView, name = "dash"),
 
-    # path del form-update Location de appdash
+    # path del la pagina para descargar el .csv
     path('exportCSV/',views.export_csv, name = "exportCSV"),
 
     # path de products de appdash
@@ -40,7 +40,7 @@ urlpatterns = [
     # path del form-remove Categories de appdash
     path('removeCategory/<str:pk>/',views.removeCategoryView, name = "removeCategory"),
 
-    # path del form- create Measureds de appdash
+    # path del form-create Measureds de appdash
     path('createMeasured/',views.createMeasuredView, name = "createMeasured"),
 
     # path del form-update Measureds de appdash

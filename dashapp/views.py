@@ -46,16 +46,24 @@ def dashboardView(request):
 
 def export_csv(request):
 
+    # Create the response to convert csv
     response = HttpResponse(content_type='text/csv')
+
+    # Generate the document with the name 
     response['Content-Disposition']='attachment; filename=Productos'+ \
         str(datetime.datetime.now())+'.csv'
     
+    # create the writher to csv file
     writer=csv.writer(response)
+
+    # Select the attributes
     writer.writerow(['SKU_id','CATE_id','MEA_id','LOC_id','description_product','brand_product','final_price_list','quantity_product','expiration_date','agregation_date','lastupdated_date','cost_unit'])
 
+    # Pass the values 
     for product in stocktaking_tb.objects.all().values_list('SKU_id','CATE_id','MEA_id','LOC_id','description_product','brand_product','final_price_list','quantity_product','expiration_date','agregation_date','lastupdated_date','cost_unit'):
         writer.writerow(product)
-        
+    
+    # return the csv in the same page
     return response
 
 # Vista de los productos de appdash in (reuiqeres estar logueado para acceder)
@@ -69,6 +77,7 @@ def productView(request):
 def createProductView(request):
     form = ProductForm()
 
+    # wait for the method POST from the html
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -84,6 +93,7 @@ def updateProductView(request, pk):
     product =stocktaking_tb.objects.get(SKU_id=pk)
     form =ProductForm(instance=product)
 
+    # wait for the method POST from the html
     if request.method == 'POST':
         form = ProductForm(request.POST,instance=product)
         if form.is_valid():
@@ -97,6 +107,8 @@ def updateProductView(request, pk):
 @login_required
 def removeProductView(request, pk):
     product =stocktaking_tb.objects.get(SKU_id=pk)
+
+    # wait for the method POST from the html
     if request.method == 'POST':
         product.delete()
         #return redirect('dashboardView')
@@ -107,7 +119,8 @@ def removeProductView(request, pk):
 @login_required
 def createLocationView(request):
     form = LocationForm()
-    
+
+    # wait for the method POST from the html
     if request.method == 'POST':
         form = LocationForm(request.POST)
         if form.is_valid():
@@ -123,6 +136,7 @@ def updateLocationView(request, pk):
     location =location_catalog.objects.get(LOC_id=pk)
     form =LocationForm(instance=location)
 
+    # wait for the method POST from the html
     if request.method == 'POST':
         form = LocationForm(request.POST,instance=location)
         if form.is_valid():
@@ -137,6 +151,7 @@ def updateLocationView(request, pk):
 def removeLocationView(request, pk):
     location =location_catalog.objects.get(LOC_id=pk)
 
+    # wait for the method POST from the html
     if request.method == 'POST':
         location.delete()
         #return redirect('dashboardView')
@@ -148,6 +163,7 @@ def removeLocationView(request, pk):
 def createCategoryView(request):
     form = CategoryForm()
 
+    # wait for the method POST from the html
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
@@ -162,6 +178,7 @@ def createCategoryView(request):
 def createMeasuredView(request):
     form = MeasuredForm()
 
+    # wait for the method POST from the html
     if request.method == 'POST':
         form = MeasuredForm(request.POST)
         if form.is_valid():
@@ -177,6 +194,7 @@ def updateCategoryView(request, pk):
     category =category_catalog.objects.get(CATE_id=pk)
     form = CategoryForm(instance=category)
 
+    # wait for the method POST from the html
     if request.method == 'POST':
         form = CategoryForm(request.POST,instance=category)
         if form.is_valid():
@@ -192,6 +210,7 @@ def updateMeasuredView(request, pk):
     measured =measured_catalog.objects.get(MEA_id=pk)
     form = MeasuredForm(instance=measured)
 
+    # wait for the method POST from the html
     if request.method == 'POST':
         form = MeasuredForm(request.POST,instance=measured)
         if form.is_valid():
@@ -206,6 +225,7 @@ def updateMeasuredView(request, pk):
 def removeCategoryView(request, pk):
     categoria =category_catalog.objects.get(CATE_id=pk)
 
+    # wait for the method POST from the html
     if request.method == 'POST':
         categoria.delete()
         #return redirect('dashboardView')
@@ -218,6 +238,7 @@ def removeCategoryView(request, pk):
 def removeMeasuredView(request, pk):
     medida = measured_catalog.objects.get(MEA_id=pk)
 
+    # wait for the method POST from the html
     if request.method == 'POST':
         medida.delete()
         #return redirect('dashboardView')

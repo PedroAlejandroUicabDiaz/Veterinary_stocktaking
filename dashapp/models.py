@@ -1,8 +1,13 @@
 from django.db import models
 from django.db.models.manager import ManagerDescriptor
 from datetime import date
-# Create your models here.
 
+
+"""
+Change the on_delete option for every ForeingKey and the languague of the attributes
+"""
+
+# Create your models here.
 class category_catalog(models.Model): 
     CATE_id = models.IntegerField(primary_key=True) 
     category_name = models.CharField(max_length=25)
@@ -26,7 +31,7 @@ class location_catalog(models.Model):
 
 class stocktaking_tb(models.Model):
     SKU_id = models.CharField(max_length=20, primary_key=True, unique=True)
-    CATE_id = models.ForeignKey(category_catalog, on_delete=models.CASCADE) 
+    CATE_id = models.ForeignKey(category_catalog, on_delete=models.CASCADE)
     MEA_id = models.ForeignKey(measured_catalog, on_delete=models.CASCADE)
     LOC_id = models.ForeignKey(location_catalog, on_delete=models.CASCADE)
     description_product = models.CharField(max_length=100, null=True, blank=True)
